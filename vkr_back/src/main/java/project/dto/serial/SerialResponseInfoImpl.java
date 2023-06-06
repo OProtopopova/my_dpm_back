@@ -3,6 +3,7 @@ package project.dto.serial;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
+import project.dao.entity.SerialImpl;
 import project.dao.entity.api.Serial;
 import project.dto.common.StatusImpl;
 import project.dto.serial.api.SerialResponseInfo;
@@ -28,13 +29,13 @@ public class SerialResponseInfoImpl implements SerialResponseInfo {
      * поле списка пользователей
      */
     @JsonProperty
-    private List<Serial> serialList;
+    private List<SerialImpl> serialList;
 
     public StatusImpl getStatus() {
         return status;
     }
 
-    public List<Serial> getSerialList() {
+    public List<SerialImpl> getSerialList() {
         if (serialList == null) {
             serialList = new ArrayList<>();
         }

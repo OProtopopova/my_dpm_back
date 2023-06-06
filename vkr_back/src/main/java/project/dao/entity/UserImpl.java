@@ -23,6 +23,7 @@ public class UserImpl implements User {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(unique = true)
     private String login;
     private String password;
     private String email;

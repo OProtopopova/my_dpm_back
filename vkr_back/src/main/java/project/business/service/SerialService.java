@@ -13,6 +13,7 @@ import project.dto.serial.SerialResponseInfoImpl;
 import project.dto.serial.api.SerialResponseInfo;
 
 import java.util.Collections;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -48,5 +49,21 @@ public class SerialService {
                 .status(StatusImpl.builder().success(true).build())
                 .serialList(Collections.singletonList(serial))
                 .build();
+    }
+
+    public SerialResponseInfo getAllByUserId(String userLogin) {
+        List<SerialImpl> foundSerials = serialRepository.findByUserLogin(userLogin);
+        log.debug(String.format("Найденный список сериалов: %s", foundSerials));
+        return foundSerials.size() > 0 ?
+                SerialResponseInfoImpl.builder()
+                        .status(StatusImpl.builder().success(true).build())
+                        .serialList(foundSerials)
+                        .build() :
+                SerialResponseInfoImpl.builder()
+                        .status(StatusImpl.builder()
+                                .success(false)
+                                .description("У пользователя еще нет сохраненнх сериалов")
+                                .build())
+                        .build();
     }
 }
